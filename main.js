@@ -23,7 +23,7 @@ let timeslotlength = 3;
 let skipOptimizers = true;
 let skipUnknownDevices = true;
 let apiVersion = 'default';
-let frequency = 1;
+let frequencys = {0:1,1:5,2:10,3:50};
 let counter = 0;
 // ########################################
 
@@ -116,7 +116,7 @@ class FusionSolarConnector extends utils.Adapter {
         let nextPoll = polltime * 1000;
         let firstTimeInitError = false;
         counter += 1;
-        this.log.error('Counter' + counter);
+
 
         try {
 
@@ -193,6 +193,8 @@ class FusionSolarConnector extends utils.Adapter {
                                 //UNKNOWN
                                 if(skipUnknownDevices) continue;
                             }
+                            
+                                    this.log.error('Frequency = ' + deviceInfo.frequency + ' Val = ' + frequencys[deviceInfo.frequency] + ' is ' + Number.isInteger(counter / frequencys[deviceInfo.frequency]));
 
                             this.log.debug('loading DevRealKpi for ' + deviceInfo.id + ' from the API...');
                             await this.getDevRealKpi(deviceInfo.id, deviceInfo.devTypeId).then((deviceRealtimeKpiData) => {
