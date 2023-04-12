@@ -281,9 +281,9 @@ class FusionSolarConnector extends utils.Adapter {
             await this.writeChannelDataToIoBroker(stationFolder, 'stationLinkman', stationInfo.stationLinkman, 'string', 'indicator',  createObjectsInitally);
             await this.writeChannelDataToIoBroker(stationFolder, 'linkmanPho', stationInfo.linkmanPho, 'string', 'indicator',  createObjectsInitally);
             if(apiVersion == 'gen-2'){
-                await this.writeChannelDataToIoBroker(stationFolder, 'plantCode', stationInfo.stationCode, 'string', 'info.name',  createObjectsInitally);
-                await this.writeChannelDataToIoBroker(stationFolder, 'plantName', stationInfo.plantName, 'string', 'info.name',  createObjectsInitally);
-                await this.writeChannelDataToIoBroker(stationFolder, 'plantAddress', stationInfo.plantAddress, 'string', 'indicator',  createObjectsInitally);
+                await this.writeChannelDataToIoBroker(stationFolder, 'stationCode', stationInfo.plantCode, 'string', 'info.name',  createObjectsInitally);
+                await this.writeChannelDataToIoBroker(stationFolder, 'stationName', stationInfo.plantName, 'string', 'info.name',  createObjectsInitally);
+                await this.writeChannelDataToIoBroker(stationFolder, 'stationAddr', stationInfo.plantAddress, 'string', 'indicator',  createObjectsInitally);
                 await this.writeChannelDataToIoBroker(stationFolder, 'contactMethod', stationInfo.contactMethod, 'string', 'indicator',  createObjectsInitally);
                 await this.writeChannelDataToIoBroker(stationFolder, 'contactPerson', stationInfo.contactPerson, 'string', 'indicator',  createObjectsInitally);
                 await this.writeChannelDataToIoBroker(stationFolder, 'latitude', stationInfo.latitude, 'string', 'indicator',  createObjectsInitally);
