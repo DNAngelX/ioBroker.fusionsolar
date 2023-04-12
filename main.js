@@ -203,7 +203,7 @@ class FusionSolarConnector extends utils.Adapter {
                             
                             if (Number.isInteger(counter / frequencys[frequency]) == false)
                             {
-                                this.log.error('SKIPPING');
+                                this.log.debug('SKIPPING because of frequency');
                                 continue;
                             }
 
