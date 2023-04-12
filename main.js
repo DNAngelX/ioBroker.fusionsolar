@@ -25,7 +25,7 @@ let skipUnknownDevices = true;
 let apiVersion = 'default';
 let frequencys = [1,5,15,50]; // every x count it will crawl
 let counter = 0;
-let frequencys = 0;
+let frequency = 0;
 // ########################################
 
 class FusionSolarConnector extends utils.Adapter {
@@ -176,11 +176,11 @@ class FusionSolarConnector extends utils.Adapter {
 
                             if(deviceInfo.devTypeId == 1){
                                 //INVERTER
-                                frequencys = 0;
+                                frequency = 0;
                             }
                             else if(deviceInfo.devTypeId == 62){
                                 //DONGLE
-                                frequencys = 3;
+                                frequency = 3;
                             }
                             else if(deviceInfo.devTypeId == 46){
                                 //OPTIMIZER
@@ -188,17 +188,20 @@ class FusionSolarConnector extends utils.Adapter {
                             }
                             else if(deviceInfo.devTypeId == 47){
                                 //METER
-                                frequencys = 0;
+                                frequency = 0;
                             }
                             else if(deviceInfo.devTypeId == 39){
                                 //BATTERY
-                                frequencys = 1;
+                                frequency = 1;
                             }
                             else {
                                 //UNKNOWN
                                 if(skipUnknownDevices) continue;
                             }
-                            if (Number.isInteger(counter / frequencys[1]) == false)
+                            
+                            // Here should be the value from deviceInfo.frequency in frequency
+                            
+                            if (Number.isInteger(counter / frequencys[frequency]) == false)
                             {
                                 this.log.error('SKIPPING');
                                 continue;
