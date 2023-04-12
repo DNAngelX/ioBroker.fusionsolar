@@ -23,8 +23,9 @@ let timeslotlength = 3;
 let skipOptimizers = true;
 let skipUnknownDevices = true;
 let apiVersion = 'default';
-let frequencys = [1,5,15,50];
+let frequencys = [0:1,1:5,2:15,3:50]; // every x count it will crawl
 let counter = 0;
+let frequencys = 0;
 // ########################################
 
 class FusionSolarConnector extends utils.Adapter {
@@ -175,9 +176,11 @@ class FusionSolarConnector extends utils.Adapter {
 
                             if(deviceInfo.devTypeId == 1){
                                 //INVERTER
+                                frequencys = 0;
                             }
                             else if(deviceInfo.devTypeId == 62){
                                 //DONGLE
+                                frequencys = 3;
                             }
                             else if(deviceInfo.devTypeId == 46){
                                 //OPTIMIZER
@@ -185,16 +188,22 @@ class FusionSolarConnector extends utils.Adapter {
                             }
                             else if(deviceInfo.devTypeId == 47){
                                 //METER
+                                frequencys = 0;
                             }
                             else if(deviceInfo.devTypeId == 39){
                                 //BATTERY
+                                frequencys = 1;
                             }
                             else {
                                 //UNKNOWN
                                 if(skipUnknownDevices) continue;
                             }
-                            
-                                    this.log.error('Frequency = ' + deviceInfo.frequency + deviceInfo.id + ' Val = ' + frequencys[1] + ' is ' + Number.isInteger(counter / frequencys[1]));
+                            if (Number.isInteger(counter / frequencys[1]) == false)
+                            {
+                                this.log.error('SKIPPING');
+                                continue;
+                            }
+
 
                             this.log.debug('loading DevRealKpi for ' + deviceInfo.id + ' from the API...');
                             await this.getDevRealKpi(deviceInfo.id, deviceInfo.devTypeId).then((deviceRealtimeKpiData) => {
@@ -399,10 +408,10 @@ class FusionSolarConnector extends utils.Adapter {
             // Update Frequency
             let selection = 
             {
-                "0":"Level 1",
-                "1":"Level 2",
-                "2":"Level 3",
-                "3":"Level 4",
+                0:"Level 1",
+                1:"Level 2",
+                2:"Level 3",
+                3:"Level 4",
 
             };
             
