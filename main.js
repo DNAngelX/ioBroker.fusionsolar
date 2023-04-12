@@ -406,7 +406,7 @@ class FusionSolarConnector extends utils.Adapter {
 
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'openTime', deviceRealtimeKpiData.open_time, 'mixed', 'indicator',  createObjectsInitally);
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'closeTime', deviceRealtimeKpiData.close_time, 'mixed', 'indicator',  createObjectsInitally);
-                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'activePower', deviceRealtimeKpiData.active_power, 'number', 'indicator',  createObjectsInitally);
+                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'activePower', deviceRealtimeKpiData.active_power, 'number', 'indicator',  createObjectsInitally,"kW");
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'reactivePower', deviceRealtimeKpiData.reactive_power, 'number', 'indicator',  createObjectsInitally);
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'powerFactor', deviceRealtimeKpiData.power_factor, 'number', 'indicator',  createObjectsInitally);
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'runState', deviceRealtimeKpiData.run_state, 'number', 'indicator',  createObjectsInitally);
@@ -525,13 +525,13 @@ class FusionSolarConnector extends utils.Adapter {
 
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'runState', deviceRealtimeKpiData.run_state, 'number', 'indicator',  createObjectsInitally);
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'batteryStatus', deviceRealtimeKpiData.battery_status, 'number', 'indicator',  createObjectsInitally);
-                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'batterySoh', deviceRealtimeKpiData.battery_soh, 'number', 'indicator',  createObjectsInitally,"%");
-                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'batterySoc', deviceRealtimeKpiData.battery_soc, 'number', 'indicator',  createObjectsInitally);
+                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'batterySoh', deviceRealtimeKpiData.battery_soh, 'number', 'indicator',  createObjectsInitally);
+                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'batterySoc', deviceRealtimeKpiData.battery_soc, 'number', 'indicator',  createObjectsInitally,"%");
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'maxChargePower', deviceRealtimeKpiData.max_charge_power, 'number', 'indicator',  createObjectsInitally);
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'maxDischargePower', deviceRealtimeKpiData.max_discharge_power, 'number', 'indicator',  createObjectsInitally);
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'chargeCap', deviceRealtimeKpiData.charge_cap, 'number', 'indicator',  createObjectsInitally);
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'dischargeCap', deviceRealtimeKpiData.discharge_cap, 'number', 'indicator',  createObjectsInitally);
-                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'chDischargePower', deviceRealtimeKpiData.ch_discharge_power, 'number', 'indicator',  createObjectsInitally);
+                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'chDischargePower', deviceRealtimeKpiData.ch_discharge_power, 'number', 'indicator',  createObjectsInitally,"kW");
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'chDischargeModel', deviceRealtimeKpiData.ch_discharge_model, 'number', 'indicator',  createObjectsInitally);
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'busbarU', deviceRealtimeKpiData.busbar_u, 'number', 'indicator',  createObjectsInitally);
 
