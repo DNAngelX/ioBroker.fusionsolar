@@ -253,11 +253,38 @@ class FusionSolarConnector extends utils.Adapter {
         return new Promise(resolve => setTimeout(resolve, (secondsToWait * 1000)));
     }
 
-    async writeChannelDataToIoBroker(channelParentPath, channelName, value, channelType, channelRole, createObjectInitally) {
+    async writeChannelDataToIoBroker(channelParentPath, channelName, value, channelType, channelRole, createObjectInitally, createObjectInitallyUnit, createObjectInitallyStates) {
         if(channelParentPath != null){
             channelParentPath = channelParentPath + '.';
         }
-        if(createObjectInitally){
+        if(createObjectInitally && createObjectInitallyUnit){
+            await this.setObjectNotExistsAsync(channelParentPath + channelName, {
+                type: 'state',
+                common: {
+                    name: channelName,
+                    type: channelType,
+                    role: channelRole,
+                    unit: createObjectInitallyUnit,
+                    read: true,
+                    write: false,
+                },
+                native: {},
+            });
+        } else if(createObjectInitally && createObjectInitallyStates){
+            //createObjectInitallyStates =  {"2": "Entladen", "1": "BLA"}
+            await this.setObjectNotExistsAsync(channelParentPath + channelName, {
+                type: 'state',
+                common: {
+                    name: channelName,
+                    type: channelType,
+                    role: channelRole,
+                    states: createObjectInitallyStates,
+                    read: true,
+                    write: false,
+                },
+                native: {},
+            });
+        } else if(createObjectInitally){
             await this.setObjectNotExistsAsync(channelParentPath + channelName, {
                 type: 'state',
                 common: {
@@ -307,7 +334,7 @@ class FusionSolarConnector extends utils.Adapter {
             //always:
             await this.writeChannelDataToIoBroker(stationFolder, 'capacity', stationInfo.capacity, 'number', 'indicator',  createObjectsInitally);
             await this.writeChannelDataToIoBroker(stationFolder, 'aidType', stationInfo.aidType, 'number', 'indicator',  createObjectsInitally);
-            await this.writeChannelDataToIoBroker(stationFolder, 'lastUpdate', new Date().toLocaleTimeString(), 'string', 'indicator',  createObjectsInitally);
+            await this.writeChannelDataToIoBroker(stationFolder, 'lastUpdate', new Date().toLocaleTimeString(), 'string', 'indicator',  createObjectsInitally);            
 
             if(stationRealtimeKpiData) {
                 const stationRealtimeKpiFolder = stationFolder + '.kpi.realtime';
@@ -498,7 +525,7 @@ class FusionSolarConnector extends utils.Adapter {
 
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'runState', deviceRealtimeKpiData.run_state, 'number', 'indicator',  createObjectsInitally);
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'batteryStatus', deviceRealtimeKpiData.battery_status, 'number', 'indicator',  createObjectsInitally);
-                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'batterySoh', deviceRealtimeKpiData.battery_soh, 'number', 'indicator',  createObjectsInitally);
+                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'batterySoh', deviceRealtimeKpiData.battery_soh, 'number', 'indicator',  createObjectsInitally,"%");
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'batterySoc', deviceRealtimeKpiData.battery_soc, 'number', 'indicator',  createObjectsInitally);
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'maxChargePower', deviceRealtimeKpiData.max_charge_power, 'number', 'indicator',  createObjectsInitally);
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'maxDischargePower', deviceRealtimeKpiData.max_discharge_power, 'number', 'indicator',  createObjectsInitally);
@@ -511,6 +538,10 @@ class FusionSolarConnector extends utils.Adapter {
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'lastUpdate', new Date().toLocaleTimeString(), 'string', 'indicator',  createObjectsInitally);
 
                 }
+                    // Always
+                    // Update Frequency
+                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'frequency', 1, 'number', 'indicator',  createObjectsInitally,null,{"0": "Level 1", "1": "Level 2", "2": "Level 3", , "3": "Level 4"});
+
 
             }
 
