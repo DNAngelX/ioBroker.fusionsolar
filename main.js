@@ -194,7 +194,7 @@ class FusionSolarConnector extends utils.Adapter {
                                 if(skipUnknownDevices) continue;
                             }
                             
-                                    this.log.error('Frequency = ' + deviceInfo.frequency + ' Val = ' + frequencys[deviceInfo.frequency] + ' is ' + Number.isInteger(counter / frequencys[deviceInfo.frequency]));
+                                    this.log.error('Frequency = ' + deviceInfo.frequency + deviceInfo.id + ' Val = ' + frequencys[1] + ' is ' + Number.isInteger(counter / frequencys[1]));
 
                             this.log.debug('loading DevRealKpi for ' + deviceInfo.id + ' from the API...');
                             await this.getDevRealKpi(deviceInfo.id, deviceInfo.devTypeId).then((deviceRealtimeKpiData) => {
