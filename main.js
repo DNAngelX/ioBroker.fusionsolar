@@ -614,10 +614,10 @@ class FusionSolarConnector extends utils.Adapter {
         let callUrl = apiUrl + '/getStationList';
         if(apiVersion == 'gen-2') {
             callUrl = apiUrl + '/stations';
-            requestBody =`{
+            requestBody ={
                 "pageNo":1,
                 "pageSize":100
-            }`;
+            };
         }
         const result = await axios.post(callUrl,
             requestBody,
