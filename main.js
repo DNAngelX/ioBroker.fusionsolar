@@ -141,16 +141,29 @@ class FusionSolarConnector extends utils.Adapter {
             if(stationList){
 
                 for(const stationInfo of stationList) {
+                    
+                    if (apiVersion == 'default') {
+                        this.log.debug('loading StationRealKpi for ' + stationInfo.stationCode + ' from the API...');
+                        await this.getStationRealKpi(stationInfo.stationCode).then((stationRealtimeKpiData) => {
+                            this.log.debug('writing station related channel values...');
+                            this.writeStationDataToIoBrokerStates(stationInfo, stationRealtimeKpiData, (isFirsttimeInit || errorCounter > 0));
+                        });
 
-                    this.log.debug('loading StationRealKpi for ' + stationInfo.stationCode + ' from the API...');
-                    await this.getStationRealKpi(stationInfo.stationCode).then((stationRealtimeKpiData) => {
-                        this.log.debug('writing station related channel values...');
-                        this.writeStationDataToIoBrokerStates(stationInfo, stationRealtimeKpiData, (isFirsttimeInit || errorCounter > 0));
-                    });
+                        if(isFirsttimeInit) {
+                            this.log.debug('initially loading DeviceList for ' + stationInfo.stationCode + ' from the API...');
+                            await this.getDevList(stationInfo.stationCode).then((result) => deviceList = result);
+                        }
+                    } else if (apiVersion == 'gen-2') {
+                        this.log.debug('loading StationRealKpi for ' + stationInfo.plantCode + ' from the API...');
+                        await this.getStationRealKpi(stationInfo.plantCode).then((stationRealtimeKpiData) => {
+                            this.log.debug('writing station related channel values...');
+                            this.writeStationDataToIoBrokerStates(stationInfo, stationRealtimeKpiData, (isFirsttimeInit || errorCounter > 0));
+                        });
 
-                    if(isFirsttimeInit) {
-                        this.log.debug('initially loading DeviceList for ' + stationInfo.stationCode + ' from the API...');
-                        await this.getDevList(stationInfo.stationCode).then((result) => deviceList = result);
+                        if(isFirsttimeInit) {
+                            this.log.debug('initially loading DeviceList for ' + stationInfo.plantCode + ' from the API...');
+                            await this.getDevList(stationInfo.plantCode).then((result) => deviceList = result);
+                        }
                     }
 
                     if(deviceList){
@@ -275,15 +288,17 @@ class FusionSolarConnector extends utils.Adapter {
                 stationFolder = '(unknown-station)';
             }
             //since API-Version 'gen-1':
-            await this.writeChannelDataToIoBroker(stationFolder, 'stationCode', stationInfo.stationCode, 'string', 'info.name',  createObjectsInitally);
-            await this.writeChannelDataToIoBroker(stationFolder, 'stationName', stationInfo.stationName, 'string', 'info.name',  createObjectsInitally);
-            await this.writeChannelDataToIoBroker(stationFolder, 'stationAddr', stationInfo.stationAddr, 'string', 'indicator',  createObjectsInitally);
-            await this.writeChannelDataToIoBroker(stationFolder, 'stationLinkman', stationInfo.stationLinkman, 'string', 'indicator',  createObjectsInitally);
-            await this.writeChannelDataToIoBroker(stationFolder, 'linkmanPho', stationInfo.linkmanPho, 'string', 'indicator',  createObjectsInitally);
-            if(apiVersion == 'gen-2'){
-                await this.writeChannelDataToIoBroker(stationFolder, 'stationCode', stationInfo.plantCode, 'string', 'info.name',  createObjectsInitally);
-                await this.writeChannelDataToIoBroker(stationFolder, 'stationName', stationInfo.plantName, 'string', 'info.name',  createObjectsInitally);
-                await this.writeChannelDataToIoBroker(stationFolder, 'stationAddr', stationInfo.plantAddress, 'string', 'indicator',  createObjectsInitally);
+            if(apiVersion == 'default'){
+                await this.writeChannelDataToIoBroker(stationFolder, 'stationCode', stationInfo.stationCode, 'string', 'info.name',  createObjectsInitally);
+                await this.writeChannelDataToIoBroker(stationFolder, 'stationName', stationInfo.stationName, 'string', 'info.name',  createObjectsInitally);
+                await this.writeChannelDataToIoBroker(stationFolder, 'stationAddr', stationInfo.stationAddr, 'string', 'indicator',  createObjectsInitally);
+                await this.writeChannelDataToIoBroker(stationFolder, 'stationLinkman', stationInfo.stationLinkman, 'string', 'indicator',  createObjectsInitally);
+                await this.writeChannelDataToIoBroker(stationFolder, 'linkmanPho', stationInfo.linkmanPho, 'string', 'indicator',  createObjectsInitally);
+            }
+            else if(apiVersion == 'gen-2'){
+                await this.writeChannelDataToIoBroker(stationFolder, 'plantCode', stationInfo.plantCode, 'string', 'info.name',  createObjectsInitally);
+                await this.writeChannelDataToIoBroker(stationFolder, 'plantName', stationInfo.plantName, 'string', 'info.name',  createObjectsInitally);
+                await this.writeChannelDataToIoBroker(stationFolder, 'plantAddress', stationInfo.plantAddress, 'string', 'indicator',  createObjectsInitally);
                 await this.writeChannelDataToIoBroker(stationFolder, 'contactMethod', stationInfo.contactMethod, 'string', 'indicator',  createObjectsInitally);
                 await this.writeChannelDataToIoBroker(stationFolder, 'contactPerson', stationInfo.contactPerson, 'string', 'indicator',  createObjectsInitally);
                 await this.writeChannelDataToIoBroker(stationFolder, 'latitude', stationInfo.latitude, 'string', 'indicator',  createObjectsInitally);
