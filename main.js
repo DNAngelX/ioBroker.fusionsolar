@@ -23,6 +23,8 @@ let timeslotlength = 3;
 let skipOptimizers = true;
 let skipUnknownDevices = true;
 let apiVersion = 'default';
+let frequency = 1;
+let counter = 0;
 // ########################################
 
 class FusionSolarConnector extends utils.Adapter {
@@ -113,6 +115,8 @@ class FusionSolarConnector extends utils.Adapter {
     async readAllStates(isFirsttimeInit, errorCounter) {
         let nextPoll = polltime * 1000;
         let firstTimeInitError = false;
+        counter += 1;
+        this.log.error('Counter' + counter);
 
         try {
 
@@ -243,7 +247,7 @@ class FusionSolarConnector extends utils.Adapter {
             }
 
         }
-
+        
         adapterIntervals.readAllStates = setTimeout(this.readAllStates.bind(this, firstTimeInitError, errorCounter), nextPoll);
     }
 
