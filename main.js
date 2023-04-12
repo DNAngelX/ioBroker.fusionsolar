@@ -23,7 +23,7 @@ let timeslotlength = 3;
 let skipOptimizers = true;
 let skipUnknownDevices = true;
 let apiVersion = 'default';
-let frequencys = [0:1,1:5,2:15,3:50]; // every x count it will crawl
+let frequencys = [1,5,15,50]; // every x count it will crawl
 let counter = 0;
 let frequencys = 0;
 // ########################################
