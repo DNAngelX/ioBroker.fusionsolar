@@ -389,6 +389,10 @@ class FusionSolarConnector extends utils.Adapter {
                     await this.writeChannelDataToIoBroker(deviceFolder, 'devTypeDesc', 'Unknown', 'string', 'info.name',  createObjectsInitally);
                 }
             }
+            
+            // Update Frequency
+            await this.writeChannelDataToIoBroker(deviceFolder, 'frequency', 1, 'number', 'indicator',  createObjectsInitally,null,[{"0": "Level 1", "1": "Level 2", "2": "Level 3", , "3": "Level 4"}]);
+            
             await this.writeChannelDataToIoBroker(deviceFolder, 'esnCode', deviceInfo.esnCode, 'string', 'info.name',  createObjectsInitally);
             await this.writeChannelDataToIoBroker(deviceFolder, 'invType', deviceInfo.invType, 'string', 'indicator',  createObjectsInitally);
             await this.writeChannelDataToIoBroker(deviceFolder, 'latitude', deviceInfo.latitude, 'number', 'indicator',  createObjectsInitally);
@@ -538,9 +542,7 @@ class FusionSolarConnector extends utils.Adapter {
                     await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'lastUpdate', new Date().toLocaleTimeString(), 'string', 'indicator',  createObjectsInitally);
 
                 }
-                    // Always
-                    // Update Frequency
-                    await this.writeChannelDataToIoBroker(deviceRealtimeKpiFolder, 'frequency', 1, 'number', 'indicator',  createObjectsInitally,null,'{"0": "Level 1", "1": "Level 2", "2": "Level 3", , "3": "Level 4"}');
+                    
 
 
             }
