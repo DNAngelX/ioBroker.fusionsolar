@@ -391,7 +391,16 @@ class FusionSolarConnector extends utils.Adapter {
             }
             
             // Update Frequency
-            await this.writeChannelDataToIoBroker(deviceFolder, 'frequency', 1, 'number', 'indicator',  createObjectsInitally,null,[{"0": "Level 1", "1": "Level 2", "2": "Level 3", , "3": "Level 4"}]);
+            let selection = 
+            {
+                "0":"Level 1",
+                "1":"Level 2",
+                "2":"Level 3",
+                "3":"Level 4",
+
+            };
+            
+            await this.writeChannelDataToIoBroker(deviceFolder, 'frequency', 1, 'number', 'indicator',  createObjectsInitally,null,selection);
             
             await this.writeChannelDataToIoBroker(deviceFolder, 'esnCode', deviceInfo.esnCode, 'string', 'info.name',  createObjectsInitally);
             await this.writeChannelDataToIoBroker(deviceFolder, 'invType', deviceInfo.invType, 'string', 'indicator',  createObjectsInitally);
