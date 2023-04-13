@@ -116,7 +116,7 @@ class FusionSolarConnector extends utils.Adapter {
     async readAllStates(isFirsttimeInit, errorCounter) {
         let nextPoll = polltime * 1000;
         let firstTimeInitError = false;
-        counter += 1;
+
 
 
         try {
@@ -201,11 +201,17 @@ class FusionSolarConnector extends utils.Adapter {
                             
                             // Here should be the value from deviceInfo.frequency in frequency
                             
-                            if (Number.isInteger(counter / frequencys[frequency]) == false)
+                            if (counter == 0)
                             {
-                                this.log.debug('SKIPPING because of frequency');
-                                continue;
+                                this.log.debug('Read all devices because it`s the first start!');
+                            } else {
+                                if (Number.isInteger(counter / frequencys[frequency]) == false)
+                                {
+                                    this.log.debug('SKIPPING because of frequency');
+                                    continue;
+                                }   
                             }
+                            
 
 
                             this.log.debug('loading DevRealKpi for ' + deviceInfo.id + ' from the API...');
@@ -261,6 +267,8 @@ class FusionSolarConnector extends utils.Adapter {
             }
 
         }
+        
+        counter += 1;
         
         adapterIntervals.readAllStates = setTimeout(this.readAllStates.bind(this, firstTimeInitError, errorCounter), nextPoll);
     }
