@@ -214,7 +214,7 @@ class FusionSolarConnector extends utils.Adapter {
                             }
                             if (skip == true)
                             {
-                                this.log.debug('SKIPPING because of frequency');
+                                this.log.debug('SKIPPING because of frequency' + deviceInfo.id);
                                 continue;
                             }
 
