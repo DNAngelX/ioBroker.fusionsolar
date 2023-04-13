@@ -80,7 +80,8 @@
         "timeslotlength": 3,
         "skipOptimizers": true,
         "skipUnknownDevices": true,
-        "apiVersion": "default"
+        "apiVersion": "default",
+        "apiRetry": true,
     },
     "objects": [],
     "instanceObjects": [
