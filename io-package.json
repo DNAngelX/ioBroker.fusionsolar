@@ -81,7 +81,7 @@
         "skipOptimizers": true,
         "skipUnknownDevices": true,
         "apiVersion": "default",
-        "apiRetry": true,
+        "apiRetry": true
     },
     "objects": [],
     "instanceObjects": [
