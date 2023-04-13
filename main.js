@@ -147,7 +147,7 @@ class FusionSolarConnector extends utils.Adapter {
             if(stationList){
 
                 for(const stationInfo of stationList) {
-                    skip = false;
+
                     if (apiVersion == 'default') {
                         this.log.debug('loading StationRealKpi for ' + stationInfo.stationCode + ' from the API...');
                         await this.getStationRealKpi(stationInfo.stationCode).then((stationRealtimeKpiData) => {
@@ -174,7 +174,7 @@ class FusionSolarConnector extends utils.Adapter {
 
                     if(deviceList){
                         for(const deviceInfo of deviceList) {
-
+                            skip = false;
                             if(deviceInfo.devTypeId == 1){
                                 //INVERTER
                                 frequency = 0;
