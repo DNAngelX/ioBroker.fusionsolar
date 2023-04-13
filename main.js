@@ -26,6 +26,7 @@ let apiVersion = 'default';
 let frequencys = [1,2,4,8,16,32]; // every x count it will crawl
 let counter = 0;
 let frequency = 0;
+let skip = false;
 // ########################################
 
 class FusionSolarConnector extends utils.Adapter {
@@ -146,7 +147,7 @@ class FusionSolarConnector extends utils.Adapter {
             if(stationList){
 
                 for(const stationInfo of stationList) {
-                    
+                    skip = false;
                     if (apiVersion == 'default') {
                         this.log.debug('loading StationRealKpi for ' + stationInfo.stationCode + ' from the API...');
                         await this.getStationRealKpi(stationInfo.stationCode).then((stationRealtimeKpiData) => {
@@ -207,11 +208,15 @@ class FusionSolarConnector extends utils.Adapter {
                             } else {
                                 if (Number.isInteger(counter / frequencys[frequency]) == false)
                                 {
-                                    this.log.debug('SKIPPING because of frequency');
-                                    continue;
+
+                                    skip = true;
                                 }   
                             }
-                            
+                            if (skip == true)
+                            {
+                                this.log.debug('SKIPPING because of frequency');
+                                continue;
+                            }
 
 
                             this.log.debug('loading DevRealKpi for ' + deviceInfo.id + ' from the API...');
