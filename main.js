@@ -204,7 +204,7 @@ class FusionSolarConnector extends utils.Adapter {
                             
                             if (counter == 0)
                             {
-                                this.log.debug('Read all devices because it`s the first start!');
+                                this.log.debug('Read all devices because it`s the first start! - '  + deviceInfo.id);
                             } else {
                                 if (Number.isInteger(counter / frequencys[frequency]) == false)
                                 {
@@ -214,7 +214,7 @@ class FusionSolarConnector extends utils.Adapter {
                             }
                             if (skip == true)
                             {
-                                this.log.debug('SKIPPING because of frequency' + deviceInfo.id);
+                                this.log.debug('SKIPPING because of frequency - ' + deviceInfo.id);
                                 continue;
                             }
 
