@@ -23,7 +23,7 @@ let timeslotlength = 3;
 let skipOptimizers = true;
 let skipUnknownDevices = true;
 let apiVersion = 'default';
-let frequencys = [1,5,15,50]; // every x count it will crawl
+let frequencys = [1,2,4,8,16,32]; // every x count it will crawl
 let counter = 0;
 let frequency = 0;
 // ########################################
@@ -180,7 +180,7 @@ class FusionSolarConnector extends utils.Adapter {
                             }
                             else if(deviceInfo.devTypeId == 62){
                                 //DONGLE
-                                frequency = 3;
+                                frequency = 6;
                             }
                             else if(deviceInfo.devTypeId == 46){
                                 //OPTIMIZER
@@ -192,7 +192,7 @@ class FusionSolarConnector extends utils.Adapter {
                             }
                             else if(deviceInfo.devTypeId == 39){
                                 //BATTERY
-                                frequency = 1;
+                                frequency = 3;
                             }
                             else {
                                 //UNKNOWN
