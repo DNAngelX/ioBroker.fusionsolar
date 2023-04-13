@@ -416,13 +416,15 @@ class FusionSolarConnector extends utils.Adapter {
                 }
             }
             
-            // Update Frequency
+            // Update Frequency, example pollTime is 60 sec, Level = all 60s, Level 2 = all 180s, Level 3 = all 320s,....
             let selection = 
             {
-                0:"Level 1",
-                1:"Level 2",
-                2:"Level 3",
-                3:"Level 4",
+                0:"Level 1 (every time)",
+                1:"Level 2 (every 2nd time)",
+                2:"Level 3 (every 4th time)",
+                3:"Level 4 (every 8th time)",
+                4:"Level 5 (every 16th time)",
+                5:"Level 6 (every 32th time)",
 
             };
             
