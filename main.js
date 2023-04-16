@@ -52,6 +52,10 @@ class FusionSolarConnector extends utils.Adapter {
     async onReady() {
 
         await this.setStateAsync('info.connection', false, true);
+        var test = this.getStateAsync('info');
+        this.log.debug('TEST - ' + JSON.stringify(test));
+        test = this.getStateAsync(this + stationInfo.stationCode);
+        this.log.debug('TEST2 - ' + JSON.stringify(test) );
 
         // LOAD SETTINGS
         if (this.config.polltime < 60) {
@@ -201,10 +205,7 @@ class FusionSolarConnector extends utils.Adapter {
                                 //UNKNOWN
                                 if(skipUnknownDevices) continue;
                             }
-                            var test = this.getStateAsync('info');
-                            this.log.debug('TEST - ' + JSON.stringify(test));
-                            this.log.debug('TEST2 - ' + JSON.stringify(this.getStateAsync(this + stationInfo.stationCode)));
-                            
+                           
                             // Here should be the value from deviceInfo.frequency in frequency
                             
                             if (counter == 0)
