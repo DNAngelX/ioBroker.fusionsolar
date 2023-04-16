@@ -53,9 +53,6 @@ class FusionSolarConnector extends utils.Adapter {
 
         await this.setStateAsync('info.connection', false, true);
 
-        const state = await this.getStateAsync('info.connection').val;
-        this.log.debug('TEST - ' + JSON.stringify(state) + state);
-        
         // LOAD SETTINGS
         if (this.config.polltime < 60) {
             this.log.error('Interval in seconds is to short (60 is minimum) -> using 180 now');
@@ -206,6 +203,10 @@ class FusionSolarConnector extends utils.Adapter {
                             }
                            
                             // Here should be the value from deviceInfo.frequency in frequency
+                            
+                            const state = await this.getStateAsync('stationInfo.plantCode');
+                            this.log.debug('TEST - ' + JSON.stringify(state) + state);
+
                             
                             if (counter == 0)
                             {
