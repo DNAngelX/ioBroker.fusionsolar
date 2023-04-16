@@ -52,11 +52,10 @@ class FusionSolarConnector extends utils.Adapter {
     async onReady() {
 
         await this.setStateAsync('info.connection', false, true);
-        var test = this.getStateAsync('info');
-        this.log.debug('TEST - ' + JSON.stringify(test));
-        test = this.getStateAsync(this);
-        this.log.debug('TEST2 - ' + JSON.stringify(test) );
 
+        var test = this.getStateAsync('info.connection');
+        this.log.debug('TEST - ' + JSON.stringify(test));
+        
         // LOAD SETTINGS
         if (this.config.polltime < 60) {
             this.log.error('Interval in seconds is to short (60 is minimum) -> using 180 now');
