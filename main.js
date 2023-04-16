@@ -210,7 +210,7 @@ class FusionSolarConnector extends utils.Adapter {
                             // Here should be the value from deviceInfo.frequency in frequency
                             
                             let deviceId = deviceInfo.id;
-                            const state = await this.getStateAsync(myStation);
+                            const state = await this.getStateAsync("myStation");
                             this.log.debug('TEST - ' + JSON.stringify(state) + myStation + deviceId);
 
                             
