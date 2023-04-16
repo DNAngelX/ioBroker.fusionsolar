@@ -203,7 +203,7 @@ class FusionSolarConnector extends utils.Adapter {
                             }
                             var test = this.getStateAsync('fusionsolar.0.NE=35841112.1000000035841116.frequency').val;
                             this.log.debug('TEST - ' + JSON.stringify(test));
-                            adapter.log.info(adapter.getState(adapter.name+'.'+adapter.instance+"));
+                            adapter.log.info(adapter.getState(adapter.name+'.'+adapter.instance));
                           this.adapter.log.info(adapter.getState(this.adapter.name+'.'+adapter.instance+"))
                             this.log.debug('TEST1 - ' + JSON.stringify(adapter.namespace));
                             
