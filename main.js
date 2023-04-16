@@ -53,7 +53,7 @@ class FusionSolarConnector extends utils.Adapter {
 
         await this.setStateAsync('info.connection', false, true);
 
-        const state = await this.getStateAsync('info.connection');
+        const state = await this.getStateAsync('info.connection').val;
         this.log.debug('TEST - ' + JSON.stringify(state) + state);
         
         // LOAD SETTINGS
