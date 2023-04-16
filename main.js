@@ -201,8 +201,9 @@ class FusionSolarConnector extends utils.Adapter {
                                 //UNKNOWN
                                 if(skipUnknownDevices) continue;
                             }
-                            var test = this.getStateAsync('info.connection');
+                            var test = this.getStateAsync('info');
                             this.log.debug('TEST - ' + JSON.stringify(test));
+                            this.log.debug('TEST2 - ' + JSON.stringify(this.getStateAsync(this)));
                             
                             // Here should be the value from deviceInfo.frequency in frequency
                             
