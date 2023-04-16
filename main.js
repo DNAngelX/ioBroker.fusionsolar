@@ -16,6 +16,7 @@ let stationList = [];
 let deviceList = [];
 let accessToken = '';
 let loggedIn = false;
+let myStation = '';
 
 // ### FROM SETTINGS ######################
 let polltime = 180;
@@ -157,7 +158,7 @@ class FusionSolarConnector extends utils.Adapter {
                             this.writeStationDataToIoBrokerStates(stationInfo, stationRealtimeKpiData, (isFirsttimeInit || errorCounter > 0));
                         });
                         
-                        let myStation = stationInfo.stationCode;
+                        myStation = stationInfo.stationCode;
 
                         if(isFirsttimeInit) {
                             this.log.debug('initially loading DeviceList for ' + stationInfo.stationCode + ' from the API...');
@@ -170,7 +171,7 @@ class FusionSolarConnector extends utils.Adapter {
                             this.writeStationDataToIoBrokerStates(stationInfo, stationRealtimeKpiData, (isFirsttimeInit || errorCounter > 0));
                         });
                         
-                        let myStation = stationInfo.plantCode;
+                        myStation = stationInfo.plantCode;
 
                         if(isFirsttimeInit) {
                             this.log.debug('initially loading DeviceList for ' + stationInfo.plantCode + ' from the API...');
