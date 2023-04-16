@@ -204,7 +204,7 @@ class FusionSolarConnector extends utils.Adapter {
                            
                             // Here should be the value from deviceInfo.frequency in frequency
                             
-                            const state = await this.getStateAsync('' + stationInfo.plantCode + '');
+                            const state = await this.getStateAsync('NE=35841112');
                             this.log.debug('TEST - ' + JSON.stringify(state) + state);
 
                             
