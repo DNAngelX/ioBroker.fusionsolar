@@ -156,6 +156,8 @@ class FusionSolarConnector extends utils.Adapter {
                             this.log.debug('writing station related channel values...');
                             this.writeStationDataToIoBrokerStates(stationInfo, stationRealtimeKpiData, (isFirsttimeInit || errorCounter > 0));
                         });
+                        
+                        let myStation = stationInfo.stationCode;
 
                         if(isFirsttimeInit) {
                             this.log.debug('initially loading DeviceList for ' + stationInfo.stationCode + ' from the API...');
@@ -167,6 +169,8 @@ class FusionSolarConnector extends utils.Adapter {
                             this.log.debug('writing station related channel values...');
                             this.writeStationDataToIoBrokerStates(stationInfo, stationRealtimeKpiData, (isFirsttimeInit || errorCounter > 0));
                         });
+                        
+                        let myStation = stationInfo.plantCode;
 
                         if(isFirsttimeInit) {
                             this.log.debug('initially loading DeviceList for ' + stationInfo.plantCode + ' from the API...');
@@ -204,7 +208,8 @@ class FusionSolarConnector extends utils.Adapter {
                            
                             // Here should be the value from deviceInfo.frequency in frequency
                             
-                            const state = await this.getStateAsync('NE=35841112');
+                            let deviceId = deviceInfo.id;
+                            const state = await this.getStateAsync('myStation.deviceId');
                             this.log.debug('TEST - ' + JSON.stringify(state) + state);
 
                             
