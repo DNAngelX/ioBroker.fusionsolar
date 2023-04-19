@@ -210,7 +210,7 @@ class FusionSolarConnector extends utils.Adapter {
                             // Here should be the value from deviceInfo.frequency in frequency
                             
                             let deviceId = deviceInfo.id;
-                            const objModel = await this.getStateAsync('info.connection');
+                            const objModel = await this.getStateAsync('NE=35841112.plantAddress');
                             this.log.debug('GETMODELFROMAPI: objModel: ' + JSON.stringify(objModel) + 'Val: ' + objModel.val);
 
                             
