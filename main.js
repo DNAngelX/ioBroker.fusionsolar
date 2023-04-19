@@ -341,7 +341,7 @@ class FusionSolarConnector extends utils.Adapter {
                 native: {},
             });
             await this.setObjectNotExistsAsync(channelParentPath, {
-                type: 'folder',
+                type: 'channel',
                 native: {},
             });
         }
