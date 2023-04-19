@@ -300,6 +300,7 @@ class FusionSolarConnector extends utils.Adapter {
     async writeChannelDataToIoBroker(channelParentPath, channelName, value, channelType, channelRole, createObjectInitally, createObjectInitallyUnit, createObjectInitallyStates) {
         if(channelParentPath != null){
             channelParentPath = channelParentPath + '.';
+            let channelParentPathInit = channelParentPath;
         }
         if(createObjectInitally && createObjectInitallyUnit){
             await this.setObjectNotExistsAsync(channelParentPath + channelName, {
@@ -340,7 +341,7 @@ class FusionSolarConnector extends utils.Adapter {
                 },
                 native: {},
             });
-            await this.setObjectNotExistsAsync(channelParentPath, {
+            await this.setObjectNotExistsAsync(channelParentPathInit, {
                 type: 'folder',
                 native: {},
             });
