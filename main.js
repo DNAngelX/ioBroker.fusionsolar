@@ -211,7 +211,7 @@ class FusionSolarConnector extends utils.Adapter {
                             
                             let deviceId = deviceInfo.id;
                             const objModel = await this.getStateAsync('info.connection');
-                            this.log.debug('GETMODELFROMAPI: objModel: ' + JSON.stringify(objModel));
+                            this.log.debug('GETMODELFROMAPI: objModel: ' + JSON.stringify(objModel) + 'Val: ' + objModel.val);
 
                             
                             if (counter == 0)
