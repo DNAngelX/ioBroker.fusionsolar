@@ -299,11 +299,10 @@ class FusionSolarConnector extends utils.Adapter {
 
     async writeChannelDataToIoBroker(channelParentPath, channelName, value, channelType, channelRole, createObjectInitally, createObjectInitallyUnit, createObjectInitallyStates) {
         if(channelParentPath != null){
-            channelParentPath = channelParentPath + '.';
-            let channelParentPathInit = channelParentPath;
+            channelParentPath = channelParentPath;
         }
         if(createObjectInitally && createObjectInitallyUnit){
-            await this.setObjectNotExistsAsync(channelParentPath + channelName, {
+            await this.setObjectNotExistsAsync(channelParentPath + '.' + channelName, {
                 type: 'state',
                 common: {
                     name: channelName,
@@ -317,7 +316,7 @@ class FusionSolarConnector extends utils.Adapter {
             });
         } else if(createObjectInitally && createObjectInitallyStates){
             //createObjectInitallyStates =  {"2": "Entladen", "1": "BLA"}
-            await this.setObjectNotExistsAsync(channelParentPath + channelName, {
+            await this.setObjectNotExistsAsync(channelParentPath + '.'+ channelName, {
                 type: 'state',
                 common: {
                     name: channelName,
@@ -330,7 +329,7 @@ class FusionSolarConnector extends utils.Adapter {
                 native: {},
             });
         } else if(createObjectInitally){
-            await this.setObjectNotExistsAsync(channelParentPath + channelName, {
+            await this.setObjectNotExistsAsync(channelParentPath + '.'+ channelName, {
                 type: 'state',
                 common: {
                     name: channelName,
@@ -341,13 +340,13 @@ class FusionSolarConnector extends utils.Adapter {
                 },
                 native: {},
             });
-            await this.setObjectNotExistsAsync(channelParentPathInit, {
+            await this.setObjectNotExistsAsync(channelParentPath, {
                 type: 'folder',
                 native: {},
             });
         }
         if(value != undefined){
-            await this.setStateAsync(channelParentPath + channelName, value, true);
+            await this.setStateAsync(channelParentPath + '.'+ channelName, value, true);
         }
     }
 
